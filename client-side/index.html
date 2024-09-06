@@ -2,51 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Employee Details</title>
     <link rel="stylesheet" href="./css/node.css">
 </head>
 <body>
-    <div class="nav">
-        <div class="one">
-            <div class="ek">
-                <img src="./images/employee.png" alt="">
-            </div>
-            <h1>EMPLOYEES.COM</h1>
-        </div>
-        <div class="two">
-            <h3><a href="./pages/add.html"><button>ADD EMPLOYEES</button></a></h3>
-        </div>
-    </div>
-    <div class="main">
+    <nav class="navbar">
+        <div class="company-name">NOVAVI</div>
+        <input class="filter-search" type="search" name="search" placeholder="Search employee" id="">
+       <a href="./pages/add.html"> <button class="add-employee-btn">Add Employee</button></a>
+    </nav>
+
     <div class="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Designation</th>
-                    <th>Salary</th>
-                    <th>Experience</th>
-                </tr>
-            </thead>
-           <tbody id="tbody" class="tbody">
-              <tr>
-                <td><input type="text" id="name" name="name" class="inp"></td>
-                <td><input type="text"  id="desig" name="desig" class="inp"></td>
-                <td><input type="text" id="salary" name="salary" class="inp"></td>
-                <td><input type="text" id="exp" name="exp" class="inp"></td>
-              </tr>
-              <tr>
-                <td align="center" colspan="4"><div class="buttons">
-                    <button id="deleteButton">Delete </button>
-                    <button id="updateButton">Update</button>
-                    <button id="saveButton">Save</button>
-                </div></td>
-              </tr>
-              <tr>
-            </tbody>
-        </table>
+        <main>
+            <table class="employee-table">
+                <h1>Employee Details:</h1>
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>Designation</th>
+                        <th>Salary</th>
+                        <th>Experience</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="">
+                    <tr>
+                        <td><input type="text" placeholder="Employee ID" class="input-box"></td>
+                        <td><input type="text" placeholder="Employee Name" class="input-box"></td>
+                        <td><input type="text" placeholder="Designation" class="input-box"></td>
+                        <td><input type="text" placeholder="Salary" class="input-box"></td>
+                        <td><input type="text" placeholder="Experience" class="input-box"></td>
+                        <td>
+                            <button class="action-btn edit-btn">Edit</button>
+                            <button class="action-btn save-btn">Save</button>
+                            <button class="action-btn delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </main>
     </div>
-</div>
 </body>
-</html> 
+</html>
