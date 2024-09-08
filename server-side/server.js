@@ -57,6 +57,52 @@ const app=http.createServer(async(req,res)=>{
         res.writeHead(200,{"Content-Type":"text/json"});
         res.end(jsonData);
     }
+
+
+if(path.pathname=="/delete"&&req.method=="DELETE"){
+    console.log("reached delete route");
+    let body=""
+    req.on("data",(chunks)=>{
+        body+=chunks.toString();
+        console.log(body);
+    })
+    req.on("end",async()=>{
+        let _id=new ObjectId(body);
+        collection.deleteOne({_id}).then(()=>{
+            res.writeHead(200,{"Content-Type":"text/plain"});
+            res.end("success")
+        }).catch(()=>{
+            res.writeHead(200,{"Content-Type":"text/plain"});
+            res.end("fail");
+        })
+    })
+}
+
+if(path.pathname=="/update" && req.method=="PUT"){
+    console.log("reached update route");
+    let body=""
+    req.on("data",(chunks)=>{
+        body=chunks.toString();
+        console.log(body);
+    })
+    req.on("end",async()=>{
+        let data=JSON.parse(body);
+        let _id=new ObjectId(data.id);
+        let updateData={
+            name:data.name,
+            desig:data.desg,
+            salary:data.salary,
+            exp:data.exp
+        }
+        await collection.updateOne({_id},{$set:updateData}).then(()=>{
+            res.writeHead(200,{"Content-Type":"text/plain"});
+            res.end("success")
+        }).catch(()=>{
+            res.writeHead(200,{"Content-Type":"text/plain"});
+            res.end("fail")
+        })
+    });
+}
 });
 
 client.connect().then(()=>{
@@ -67,3 +113,4 @@ client.connect().then(()=>{
 }).catch((error)=>{
     console.log(error);
 })
+
