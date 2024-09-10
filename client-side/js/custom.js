@@ -1,3 +1,4 @@
+let arr=[];
 async function getEmployee() {
     const res =  fetch("http://localhost:3011/getemployee");
     const data = await (await res).json();
@@ -5,7 +6,7 @@ async function getEmployee() {
     data.map((dt)=>{
                         str+=`
                         <tr>
-                        <td><input type="text" id="name-${dt._id}" name="name" value=${dt.name} disabled=true placeholder="Employee Name" class="input-box"></td>
+                        <td><input type="text" id="name-${dt._id}" name="name" value="${dt.name}" disabled=true placeholder="Employee Name" class="input-box"></td>
                         <td><input type="text" id="desg-${dt._id}" name="desg" value=${dt.desig} disabled=true placeholder="Designation" class="input-box"></td>
                         <td><input type="text" id="salary-${dt._id}" name="salary" value=${dt.salary} disabled=true placeholder="Salary" class="input-box"></td>
                         <td><input type="text" id="exp-${dt._id}" name="exp"  value=${dt.exp} disabled=true placeholder="Experience" class="input-box"></td>
@@ -18,7 +19,13 @@ async function getEmployee() {
                         </td>
                         </tr>
                         `
+        arr.push(dt);
+        console.log(dt.name);
+        
+
     })
+
+    
     document.getElementById("main").innerHTML=str;
     let salary=0;
     data.map((dt)=>{
@@ -83,4 +90,26 @@ getEmployee();
             alert("Updation Failed")
         }
     }
+    document.getElementById("search").addEventListener('keyup',(e)=>{
+        str=``;
+        arr.filter((i)=>i.name.toLowerCase().includes(e.target.value.toLowerCase())).map((dt)=>{
+            str+=`
+                         <tr>
+                        <td><input type="text" id="name-${dt._id}" name="name" value=${dt.name} disabled=true placeholder="Employee Name" class="input-box"></td>
+                        <td><input type="text" id="desg-${dt._id}" name="desg" value=${dt.desig} disabled=true placeholder="Designation" class="input-box"></td>
+                        <td><input type="text" id="salary-${dt._id}" name="salary" value=${dt.salary} disabled=true placeholder="Salary" class="input-box"></td>
+                        <td><input type="text" id="exp-${dt._id}" name="exp"  value=${dt.exp} disabled=true placeholder="Experience" class="input-box"></td>
+                         <td><div id="tsalary-${dt._id}"></div></td>
+                        
+                        <td>
+                            <button class="action-btn edit-btn" onclick="handleEdit('${dt._id}')">Edit</button>
+                            <button class="action-btn save-btn" onclick="handleSave('${dt._id}')">Save</button>
+                            <button class="action-btn delete-btn" onclick="handleDelete('${dt._id}')">Delete</button>
+                        </td>
+                        </tr>
+                        `
+        })
+        document.getElementById("main").innerHTML=str;
+    
+    })
     
